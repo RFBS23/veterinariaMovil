@@ -18,12 +18,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".eliminarcliente"
+            android:exported="false" />
+        <activity
+            android:name=".buscarcliente"
+            android:exported="false" />
+        <activity
+            android:name=".registrocliente"
+            android:exported="false" />
+        <activity
+            android:name=".vistapersonas"
+            android:exported="false" />
+        <activity
             android:name=".editarcliente"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen" />
         <activity
             android:name=".listacliente"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".dashboard"
             android:exported="false"

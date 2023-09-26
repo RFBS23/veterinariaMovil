@@ -91,8 +91,38 @@ public class login extends Activity {
         } else if (claveacceso.isEmpty()) {
             loginpassword.setError("Ingrese su contraseña");
         } else {
-            abrirActivity(dashboard.class);
+            Iniciarsesion();
         }
+    }
+
+    private void Iniciarsesion(){
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.equalsIgnoreCase("")) {
+                    logindni.requestFocus();
+                    abrirActivity(dashboard.class);
+                    Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("operacion", "login");
+                parametros.put("dni", dni);
+                parametros.put("claveacceso", claveacceso);
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
     }
 
 }
