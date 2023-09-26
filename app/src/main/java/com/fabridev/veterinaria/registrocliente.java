@@ -1,9 +1,12 @@
 package com.fabridev.veterinaria;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.VoiceInteractor;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +24,12 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class registrocliente extends AppCompatActivity {
+public class registrocliente extends Activity {
 
     EditText registronombres, registroapellidos, registrodni, registroclave;
     Button btnregistrar;
     String nombres, apellidos, dni, claveacceso;
-    String URL = "http://192.168.1.39/veterinariaMovil/controllers/clientes.controllers.php";
+    final String URL = "http://192.168.1.36/veterinariaMovil/controllers/clientes.controllers.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +73,29 @@ public class registrocliente extends AppCompatActivity {
         } else if (claveacceso.isEmpty()) {
             registroclave.setError("Ingresa una contraseña");
         } else {
-            registrarCliente();
+            mostrarDialogoRegistro();
         }
+    }
+
+    private void mostrarDialogoRegistro(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Veterinaria");
+        dialog.setMessage("¿Se estan Validando los datos Ingresados?");
+        dialog.setCancelable(false);
+
+        dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                registrarCliente();
+            }
+        });
+        dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        dialog.show();
     }
 
     private void registrarCliente(){

@@ -32,7 +32,7 @@ public class login extends Activity {
     private boolean vercontraseña = false;
     String dni, claveacceso;
 
-    String URL = "http://192.168.1.39/veterinariaMovil/controllers/clientes.controllers.php";
+    final String URL = "http://192.168.1.36/veterinariaMovil/controllers/clientes.controllers.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class login extends Activity {
         } else if (claveacceso.isEmpty()) {
             loginpassword.setError("Ingrese su contraseña");
         } else {
-            Iniciarsesion();
+            abrirActivity(dashboard.class);
         }
     }
 
